@@ -1,13 +1,18 @@
 import React from 'react';
 
-const PotholeList = ({title, potholes, isLoading}) => <div>
+// TODO: (destructuring in javascript.)
+/* example: 
+  const {title,potholes,isLoading, searchTerm} = props;
+*/
+const PotholeList = ({title, potholes, isLoading, searchTerm}) => <div>
   <h3>{title}</h3>
+  <h5>{searchTerm}</h5>
   { (isLoading) 
     ? <div>...loading</div>
     : <ul>
       {
         potholes.map(
-          (hole) => <li>{hole.sr_location}</li>
+          (hole, key) => <li key={key}>{hole.sr_location}</li>
         )
        } 
       </ul>

@@ -11,6 +11,7 @@ class MainContainer extends Component {
       potholes: [],
       title: 'Title of page',
       isLoading: false,
+      searchTerm: '',
     }
   }
 
@@ -38,14 +39,29 @@ class MainContainer extends Component {
   render() {
     return(
       <div>
-        <Typeahead />
+        <Typeahead 
+          potholeSearch={this._searchPotholes} 
+        />
         <PotholeList 
           title={this.state.title}
           potholes={this.state.potholes} 
           isLoading={this.state.isLoading}
+          searchTerm={this.state.searchTerm}
         />
+      
       </div>
     )
+  }
+
+  // The following two methods are accomplishing the exact same thing. 
+  // The only difference is where we extract the actual search text value from the input field.
+  /*_searchPotholes = (e) => {
+    const searchTerm = e.currentTarget.value;
+    console.log('type', searchTerm);
+    this.setState({...this.state, searchTerm: searchTerm }); // {...this.state, } (spread operator javascript)
+  }*/
+  _searchPotholes = (searchTerm) => {
+    this.setState({...this.state, searchTerm: searchTerm });
   }
 }
 
