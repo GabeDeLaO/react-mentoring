@@ -8,7 +8,7 @@ class Main extends Component {
   }
 
   render() {
-    //let {name, email} = this.props;
+    let {name, email} = this.props;
     return(
     <div>
       <Toolbar />
@@ -17,14 +17,10 @@ class Main extends Component {
           type="email" 
           placeholder="Enter email" 
           onChange={this._handleEmailField}
-          value={this.props.email}
+          
           />
       </Form><br/>
-      {
-      this.state.email.length 
-        ? <h3>{this.props.email && this.props.email}</h3>
-        : <h3>Type your name homie!</h3>
-      }
+      
       <ul>
         { this.props.potholes && this.props.potholes.map( (pothole, key) => <li key={key}>{pothole.sr_location}</li>)}
       </ul>
