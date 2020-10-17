@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import Typeahead from '../components/Typeahead';
 import PotholeList from '../components/PotholeList';
+import {connect} from 'react-redux';
+import {doFilter} from '../redux/actions';
 
 class MainContainer extends Component {
   constructor(props) {
@@ -61,8 +63,22 @@ class MainContainer extends Component {
     this.setState({...this.state, searchTerm: searchTerm }); // {...this.state, } (spread operator javascript)
   }*/
   _searchPotholes = (searchTerm) => {
-    this.setState({...this.state, searchTerm: searchTerm });
+    /*
+    Here we are going to add a redux action function, also more commonly known as an action creator.
+    */
+    
+    /*this.setState({...this.state, searchTerm: searchTerm });*/
+    this.props.doFilter('the term');
   }
 }
 
-export default MainContainer;
+const mapStateToProps = state => {
+  const {potholes} = state;
+  return { potholes };
+}
+
+const mapDispatchToProps = dispatch => ({
+  doFilter
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainContainer);
